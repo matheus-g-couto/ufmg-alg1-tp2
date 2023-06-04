@@ -33,12 +33,25 @@ class Graph {
 
     /*
         Adicona uma aresta ao grafo
-        @param node_1: extremidade da aresta
-        @param node_2: extremidade da aresta
+        @param person_name: nome do candidato
+        @param role: nome do cargo
     */
     void addEdge(string person_name, string role);
 
+    // retorna o número de pares encontrados pelo algoritmo guloso
     int solveGreedy();
+
+    // retorna o número de pares encontrados pelo algoritmo exato
+    int solveAccurate();
+
+    // imprime a lista de adjacências do grafo
+    void printAdjacencyList();
+
+    // imprime o mapeamento de pessoas - chave
+    void printPeopleMap();
+
+    // imprime a o mapeamento de cargos - chave
+    void printRolesMap();
 };
 
 #endif  // GRAPH_HPP

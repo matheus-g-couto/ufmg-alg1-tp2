@@ -20,6 +20,7 @@ int main(int argc, char const *argv[]) {
         link_out->addEdge(person_name, role);
     }
 
-    link_out->solveGreedy();
+    std::cout << "Guloso: " << link_out->solveGreedy() << std::endl;
+    std::cout << "Exato: " << link_out->solveAccurate() << std::endl;
     return 0;
 }
