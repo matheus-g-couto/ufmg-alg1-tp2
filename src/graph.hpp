@@ -17,14 +17,14 @@ class Graph {
     int person_counter;
     int role_counter;
 
-    // mapeia uma nova pessoa
+    // Mapeia uma nova pessoa
     void addPerson(string name);
 
-    // mapeia um novo cargo
+    // Mapeia um novo cargo
     void addRole(string role);
 
     /*
-        busca um caminho aumentante entre um usuario e um cargo
+        Busca um caminho aumentante entre um usuario e um cargo
         @param person_idx: id do usuario
         @param visited[]: vetor auxiliar que armazena se um usuario ja tentou ocupar um cargo
         @param role_match[]: vetor que armazena o usuario que ocupa cada cargo
@@ -40,25 +40,25 @@ class Graph {
     ~Graph();
 
     /*
-        adicona uma aresta ao grafo
+        Adicona uma aresta ao grafo
         @param person_name: nome do candidato
         @param role: nome do cargo
     */
     void addEdge(string person_name, string role);
 
-    // retorna o número de pares encontrados pelo algoritmo guloso
+    // Retorna o número de pares encontrados pelo algoritmo guloso
     int solveGreedy();
 
-    // retorna o número de pares encontrados pelo algoritmo exato
+    // Retorna o número de pares encontrados pelo algoritmo exato
     int solveAccurate();
 
-    // imprime a lista de adjacências do grafo
+    // Imprime a lista de adjacências do grafo
     void printAdjacencyList();
 
-    // imprime o mapeamento de pessoas - chave
+    // Imprime o mapeamento de pessoas - chave
     void printPeopleMap();
 
-    // imprime a o mapeamento de cargos - chave
+    // Imprime a o mapeamento de cargos - chave
     void printRolesMap();
 };
 

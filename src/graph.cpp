@@ -21,18 +21,20 @@ Graph::Graph(int person_total, int role_total) {
 
 Graph::~Graph() {
     this->adjacency_list.resize(0);
-    this->person_total = -1;
+    this->person_total = this->role_total = -1;
+
+    this->person_counter = this->role_counter = 0;
 }
 
 void Graph::addPerson(string name) {
-    if (!this->person_id[name]) {
+    if (!this->person_id[name]) {  // verifica se a pessoa foi inserido previamente
         this->person_id[name] = this->person_counter;
         this->person_counter++;
     }
 }
 
 void Graph::addRole(string role) {
-    if (!this->role_id[role]) {
+    if (!this->role_id[role]) {  // verifica se o cargo foi inserido previamente
         this->role_id[role] = this->role_counter;
         this->role_counter++;
     }
