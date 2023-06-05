@@ -1,6 +1,6 @@
 #include "graph.hpp"
 
-#include <bits/stdc++.h>
+#include <string.h>
 
 #include <iostream>
 #include <vector>
@@ -72,15 +72,17 @@ void Graph::printRolesMap() {
 int Graph::solveGreedy() {
     map<int, int> matchings;
 
-    // bool *matched_person = new bool[person_total];
-    bool *matched_role = new bool[role_total];
+    vector<bool> matched_role;
+    matched_role.resize(role_total);
 
     map<string, int>::iterator it;
     for (it = this->person_id.begin(); it != this->person_id.end(); it++) {
         for (int i = 0; i < (int)this->adjacency_list[it->second - 1].size(); i++) {
-            if (!matched_role[this->adjacency_list[it->second - 1][i]]) {
-                matchings[it->second - 1] = this->adjacency_list[it->second - 1][i];
-                matched_role[this->adjacency_list[it->second - 1][i]] = true;
+            int role_idx = this->adjacency_list[it->second - 1][i];
+
+            if (!matched_role[role_idx]) {
+                matchings[it->second - 1] = role_idx;
+                matched_role[role_idx] = true;
                 break;
             }
         }
@@ -89,4 +91,33 @@ int Graph::solveGreedy() {
     return matchings.size();
 }
 
-int Graph::solveAccurate() { return 0; }
+bool Graph::findAugmentingPath(int person_idx, bool visited[], int role_match[]) {
+    for (int role_idx : adjacency_list[person_idx]) {
+        if (!visited[role_idx]) {
+            visited[role_idx] = true;
+
+            if (role_match[role_idx] < 0 || findAugmentingPath(role_match[role_idx], visited, role_match)) {
+                role_match[role_idx] = person_idx;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int Graph::solveAccurate() {
+    int matchings = 0;
+
+    int role_match[role_total];
+    memset(role_match, -1, sizeof(role_match));
+
+    for (int i = 0; i < person_total; i++) {
+        bool visited[role_total];
+        memset(visited, false, sizeof(visited));
+
+        if (findAugmentingPath(i, visited, role_match)) matchings++;
+    }
+
+    return matchings;
+}

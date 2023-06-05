@@ -23,6 +23,14 @@ class Graph {
     // mapeia um novo cargo
     void addRole(string role);
 
+    /*
+        busca um caminho aumentante entre um usuario e um cargo
+        @param person_idx: id do usuario
+        @param visited[]: vetor auxiliar que armazena se um usuario ja tentou ocupar um cargo
+        @param role_match[]: vetor que armazena o usuario que ocupa cada cargo
+    */
+    bool findAugmentingPath(int person_idx, bool visited[], int role_match[]);
+
    public:
     Graph();
 
@@ -32,7 +40,7 @@ class Graph {
     ~Graph();
 
     /*
-        Adicona uma aresta ao grafo
+        adicona uma aresta ao grafo
         @param person_name: nome do candidato
         @param role: nome do cargo
     */
